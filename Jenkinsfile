@@ -1,5 +1,5 @@
 pipeline {
-  
+  def mvnHome=tool 'maven3'
   environment {
     registry = 'http://101.53.158.226:5000/crowler'
     dockerImage = ''
@@ -11,7 +11,11 @@ pipeline {
         git(url: 'https://github.com/simpleAdminDeveloper/crowler.git', branch: 'master', changelog: true)
       }
     }
-
+    stage('Build Project') {
+      // build project via maven
+      sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+    }
+    
     stage('Build image') {
       steps {
         script {
