@@ -1,4 +1,9 @@
 pipeline {
+  
+  environment {
+    registry = 'http://101.53.158.226:5000/crowler'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('init') {
@@ -36,9 +41,5 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    registry = 'http://101.53.158.226:5000/crowler'
-    dockerImage = ''
   }
 }
