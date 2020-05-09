@@ -1,8 +1,11 @@
 pipeline {
   
   environment {
-    registry = 'http://101.53.158.226:5000/crowler'
+    registry = "http://101.53.158.226:5000/crowler"
+    dockerRepoUrl= "http://101.53.158.226:5000"
+    dockerImageName="crowler"
     dockerImage = ''
+    dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     mvnHome=tool 'maven3'
   }
   agent any
@@ -15,14 +18,19 @@ pipeline {
     stage('Build Project') {
       // build project via maven
       steps{
-        sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+        sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean compile install -DskipTests package"
       }
     }
     
     stage('Build image') {
       steps {
         script {
-          dockerImage=docker.build registry + ":$BUILD_NUMBER"
+          sh "whoami"
+          sh "ls -all /var/run/docker.sock"
+          sh "mv ./target/*.jar ./data" 
+      
+          dockerImage = docker.build("crowler")
+          //dockerImage=docker.build registry + ":$BUILD_NUMBER"
         }
 
       }
@@ -31,9 +39,12 @@ pipeline {
     stage('Push Image') {
       steps {
         script {
-          docker.withRegistry("") {
-            dockerImage.push()
-          }
+          echo "Docker Image Tag Name: ${dockerImageTag}"
+          sh "docker tag ${dockerImageName} ${dockerImageTag}"
+          sh "docker push ${dockerImageTag}"
+          //docker.withRegistry("") {
+            //dockerImage.push()
+          //}
         }
 
       }
