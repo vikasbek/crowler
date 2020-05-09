@@ -38,7 +38,7 @@ pipeline {
 
   }
   environment {
-    registry = 'http://101.53.158.226:5000/v2/_catalog'
-    dockerImage = 'crowler'
+    registry = 'http://101.53.158.226:5000/crowler'
+    dockerImage = ''
   }
 }
