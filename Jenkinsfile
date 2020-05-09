@@ -1,8 +1,9 @@
 pipeline {
-  def mvnHome=tool 'maven3'
+  
   environment {
     registry = 'http://101.53.158.226:5000/crowler'
     dockerImage = ''
+    mvnHome=tool 'maven3'
   }
   agent any
   stages {
