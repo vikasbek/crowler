@@ -18,7 +18,7 @@ pipeline {
     stage('Build Project') {
       // build project via maven
       steps{
-        sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean compile install -DskipTests package"
+        sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean compile install -DskipTests"
       }
     }
     
