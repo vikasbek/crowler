@@ -2,7 +2,7 @@ pipeline {
   
   environment {
     registry = "http://101.53.158.226:5000/crowler"
-    dockerRepoUrl= "http://101.53.158.226:5000"
+    dockerRepoUrl= "101.53.158.226:5000"
     dockerImageName="crowler"
     dockerImage = ''
     dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
