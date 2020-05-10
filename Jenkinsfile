@@ -27,8 +27,8 @@ pipeline {
         script {
           sh "whoami"
           sh "ls -all /var/run/docker.sock"
-          sh "mv ./target/*.jar ./data" 
-      
+          sh "cp ./target/*.jar ./data" 
+          sh "cp ./target/*.jar ."
           dockerImage = docker.build("crowler")
           //dockerImage=docker.build registry + ":$BUILD_NUMBER"
         }
