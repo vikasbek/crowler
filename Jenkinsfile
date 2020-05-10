@@ -53,7 +53,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(config:"crowlerKube.yaml", kubeConfigId:"mykubeconfig")
+          kubernetesDeploy(config:"crowlerKube.yaml", kubeconfigId:"mykubeconfig")
         }
 
       }
