@@ -42,6 +42,7 @@ pipeline {
           echo "Docker Image Tag Name: ${dockerImageTag}"
           sh "docker tag ${dockerImageName} ${dockerImageTag}"
           sh "docker push ${dockerImageTag}"
+          sh "docker rmi ${dockerImageTag}"
           //docker.withRegistry("") {
             //dockerImage.push()
           //}
