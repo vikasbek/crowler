@@ -46,7 +46,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>users-service</finalName>
+		<finalName>crowler</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
