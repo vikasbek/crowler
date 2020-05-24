@@ -29,9 +29,9 @@ metadata:
 spec:
   ports:
   - nodePort: 32223
-    port: 8082
+    port: 8089
     protocol: TCP
-    targetPort: 8082
+    targetPort: 8089
   selector:
     app: crowler
   type: NodePort
