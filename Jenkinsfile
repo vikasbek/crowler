@@ -5,6 +5,7 @@ pipeline {
     dockerRepoUrl= "101.53.158.226:5000"
     dockerImageName="crowler"
     dockerImage = ''
+    dockerImageNameBuild="${dockerImageName}:${env.BUILD_NUMBER}"
     dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     mvnHome=tool 'maven3'
   }
@@ -41,7 +42,7 @@ pipeline {
       steps {
         script {
           echo "Docker Image Tag Name: ${dockerImageTag}"
-          sh "docker tag ${dockerImageName} ${dockerImageTag}"
+          sh "docker tag ${dockerImageName} ${dockerImageNameBuild}"
           sh "docker push ${dockerImageTag}"
           sh "docker rmi ${dockerImageTag}"
           //docker.withRegistry("") {
