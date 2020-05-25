@@ -42,6 +42,7 @@ pipeline {
       steps {
         script {
           echo "Docker Image Tag Name: ${dockerImageTag}"
+          echo "Docker Image Tag Name: ${dockerImageName} ${dockerImageNameBuild}"
           sh "docker tag ${dockerImageName} ${dockerImageNameBuild}"
           sh "docker push ${dockerImageTag}"
           sh "docker rmi ${dockerImageTag}"
