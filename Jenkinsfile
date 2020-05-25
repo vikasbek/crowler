@@ -30,6 +30,7 @@ pipeline {
           sh "cp ./target/*.jar ./data" 
           sh "cp ./target/*.jar ."
           dockerImage = docker.build("crowler")
+          echo "Docker Image : ${dockerImage}"
           //dockerImage=docker.build registry + ":$BUILD_NUMBER"
         }
 
