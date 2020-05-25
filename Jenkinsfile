@@ -6,6 +6,7 @@ pipeline {
     dockerImageName="crowler"
     dockerImage = ''
     dockerImageNameBuild="${dockerImageName}:${env.BUILD_NUMBER}"
+    dockerImageTagLatest = "${dockerRepoUrl}/${dockerImageName}:latest"
     dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     mvnHome=tool 'maven3'
   }
@@ -43,8 +44,10 @@ pipeline {
         script {
           echo "Docker Image Tag Name: ${dockerImageTag}"
           echo "Docker Image Tag Name: ${dockerImageName} ${dockerImageNameBuild}"
-          sh "docker tag ${dockerImageName} ${dockerImageNameBuild}"
+          sh "docker tag ${dockerImageName} ${dockerImageTag}"
+          sh "docker tag ${dockerImageName} ${dockerImageTagLatest}"
           sh "docker push ${dockerImageTag}"
+           sh "docker push ${dockerImageTagLatest}"
           sh "docker rmi ${dockerImageTag}"
           //docker.withRegistry("") {
             //dockerImage.push()
