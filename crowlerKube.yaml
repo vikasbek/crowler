@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+kind: Deployment    
+metadata:              
+  name: crowler
+spec:                
+  selector:         
+    matchLabels:
+      app: crowler
+  replicas: 3        
+  template:
+    metadata:
+      labels:        
+        app: crowler
+    spec:
+      containers:
+      - image: 101.53.158.226:5000/crowler:latest
+        imagePullPolicy: Always
+        name: crowler
+        ports:
+          - containerPort: 8089
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: crowler
+  name: crowler
+spec:
+  #type: NodePort
+  ports:
+     - protocol: TCP
+      port: 8089
+      targetPort: 8089
+  #clusterIP: 10.0.171.239
+  type: LoadBalancer
+   # - nodePort: 32223
+   #   port: 8089
+   #   protocol: TCP
+   #   targetPort: 8089
+  selector:
+    app: crowler
+  

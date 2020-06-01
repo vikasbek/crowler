@@ -45,8 +45,8 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
 	<build>
+		<finalName>crowler</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
