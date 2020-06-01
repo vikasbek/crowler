@@ -3,6 +3,8 @@ package com.crowler.crowler.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,15 +19,19 @@ import com.crowler.crowler.vo.TokenResponse;
 @RequestMapping("api/v1/crowl")
 public class CrowlerApiController {
 
+	Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private Crowler crowler;
 
 	@GetMapping("/home")
 	private String index() {
+		logger.info("get index");
 		return "index";
 	}
+
 	@GetMapping("/")
 	private TokenResponse crowl(@RequestParam("uri") String uri, @RequestParam("depth") int depth) {
+		logger.info("In crowl uri:{}, depth:{}", uri, depth);
 		String token = crowler.getRequestToken();
 		crowler.crowlRequest(token, uri, depth);
 		TokenResponse tokenResponse = new TokenResponse();
@@ -35,6 +41,7 @@ public class CrowlerApiController {
 
 	@GetMapping("/result/{reqId}")
 	private RequestResult crowl(@PathVariable String reqId) {
+		logger.info("In crowl result request:{}", reqId);
 		RequestResult result = new RequestResult();
 		List<PageDetail> pageResult = crowler.getResult(reqId);
 		if (pageResult != null && pageResult.size() > 0) {
