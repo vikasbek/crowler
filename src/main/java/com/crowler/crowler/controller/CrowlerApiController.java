@@ -26,6 +26,8 @@ public class CrowlerApiController {
 	@GetMapping("/home")
 	private String index() {
 		logger.info("get index");
+		logger.info("get index 1");
+		logger.info("get index 2");
 		return "index";
 	}
 
