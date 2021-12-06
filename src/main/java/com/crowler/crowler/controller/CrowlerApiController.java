@@ -28,7 +28,7 @@ public class CrowlerApiController {
 		logger.info("get index");
 		logger.info("get index 1");
 		logger.info("get index 2");
-		return "index 1";
+		return "index 2";
 	}
 
 	@GetMapping("/")
