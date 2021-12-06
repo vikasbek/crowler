@@ -13,7 +13,7 @@ spec:
         app: crowler
     spec:
       containers:
-      - image: 101.53.158.226:5000/crowler:latest
+      - image: 101.53.155.198:5000/crowler:latest
         imagePullPolicy: Always
         name: crowler
         ports:
