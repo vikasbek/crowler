@@ -29,7 +29,7 @@ metadata:
 spec:
   #type: NodePort
   ports:
-     - protocol: TCP
+    - protocol: TCP
       port: 8089
       targetPort: 8089
   #clusterIP: 10.0.171.239
